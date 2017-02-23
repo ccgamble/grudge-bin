@@ -35,7 +35,6 @@ getGrudges = () => {
 
 addNames = (res) => {
   $('.display-name').text('')
-  $('.grudge-items').html('')
   res.map(function(grudge) {
     $('.display-name').append(`<li><a href="/api/grudges/${grudge.id}" class="indvidual-name" id="${grudge.id}">${grudge.data.name}</a></li>`)
   })
@@ -75,6 +74,19 @@ getIndividualData = (id) => {
 }
 
 displayIndvidualInfo = (res) => {
-  $('.individual-name').text(res[0].data.name)
-  $('.individual-description').text(res[0].data.description)
+  $('.individual-name').text(res[0].data.name);
+  $('.individual-description').text(res[0].data.description);
+  checkForForgiveness(res);
+}
+
+checkForForgiveness = (res) => {
+  res[0].data.forgiven === true ? 
+  $('.forgive-checkbox').attr('checked') :
+  $('.forgive-checkbox').removeAttr('checked')
+  $('.forgive-checkbox').on('click', (e) => {
+    let checked = $('.forgive-checkbox').prop('checked')
+    console.log(checked)
+    checked = res[0].data.forgiven
+    console.log(res[0].data.forgiven)
+  })
 }
