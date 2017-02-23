@@ -5,6 +5,25 @@
     <title>Grudge Bin</title>
   </head>
   <body>
-    <p>Hello World</p>
+    <form class="input-form" method="post">
+      <label for="name-input">
+        Who wronged you?
+        <input class="name-input" type="text" name="Name">
+      </label></br>
+      <label for="description-input">
+        What was their offense?
+        <input class="description-input" type="text" name="Description">
+      </label></br>
+      <label for="date-input">
+        When did this occur?
+        <input class="date-input" type="date" name="date">
+      </label></br>
+      <input class="input-submit-btn" type="submit" value="Submit">
+    </form>
+    
+    <div class="grudge-display">Grudges</div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="scripts.js"></script>  
   </body>
 </html>

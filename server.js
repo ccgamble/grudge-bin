@@ -25,3 +25,12 @@ app.get('/', (request, response) => {
 app.get('/api/grudges', (req, res) => {
   res.json(app.locals.grudges)
 })
+
+app.post('/api/grudges', (req, res) => {
+  const data = req.body
+  const id = md5(data.description)
+  const grudge = {id, data}
+  
+  app.locals.grudges.push(grudge);
+  res.status(200).json({grudge});
+})
