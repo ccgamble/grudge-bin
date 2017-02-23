@@ -14,9 +14,7 @@ app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
 });
 
-app.locals.grudges = [
-  {id: 1}
-]
+app.locals.grudges = []
 
 app.get('/', (request, response) => {
 	response.sendFile(__dirname + '/public/index.html');
@@ -24,4 +22,13 @@ app.get('/', (request, response) => {
 
 app.get('/api/grudges', (req, res) => {
   res.json(app.locals.grudges)
+})
+
+app.post('/api/grudges', (req, res) => {
+  const data = req.body
+  const id = md5(data.description)
+  const grudge = {id, data}
+  
+  app.locals.grudges.push(grudge);
+  res.status(200).json({grudge});
 })
