@@ -30,5 +30,12 @@ app.post('/api/grudges', (req, res) => {
   const grudge = {id, data}
   
   app.locals.grudges.push(grudge);
-  res.status(200).json({grudge});
+  res.status(200).json(grudge);
 })
+
+app.get('/api/grudges/:id', (req, res) => {
+  const data = app.locals.grudges.filter((grudge) => {
+    return grudge.id === req.params.id
+  });
+  res.json(data)
+});

@@ -34,11 +34,13 @@ getGrudges = () => {
 }
 
 addNames = (res) => {
+  $('.display-name').text('')
+  $('.grudge-items').html('')
   res.map(function(grudge) {
-    $('.display-name').append(`<li>${grudge.data.name}</li>`)
+    $('.display-name').append(`<li><a href="/api/grudges/${grudge.id}" class="indvidual-name" id="${grudge.id}">${grudge.data.name}</a></li>`)
   })
 }
-
+  
 countTotal = (res) => {
   $('.total-count').text(res.length)
 }
@@ -55,4 +57,24 @@ countForgiven = (res) => {
     return grudge.data.forgiven === 'true'
   })
   return $('.forgiven-count').text(forgiven.length)  
+}
+
+$(document).on('click', '.indvidual-name', (e) => {
+  e.preventDefault()
+  const id = e.target.id
+  getIndividualData(id);
+})
+
+getIndividualData = (id) => {
+  $.ajax({
+    type: 'GET',
+    url: `/api/grudges/${id}`
+  }).then(function(res) {
+    displayIndvidualInfo(res);
+  })
+}
+
+displayIndvidualInfo = (res) => {
+  $('.individual-name').text(res[0].data.name)
+  $('.individual-description').text(res[0].data.description)
 }
