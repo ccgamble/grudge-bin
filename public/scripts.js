@@ -4,14 +4,7 @@ $('.input-submit-btn').on('click', (e) => {
 })
 
 addGrudge = (data) => {
-  $('.grudge-display').append(`
-    <ul>
-      <li>Name: ${data.grudge.data.name}</li>
-      <li>Offense: ${data.grudge.data.description}</li>
-      <li>Date: ${data.grudge.data.date}</li>
-      <li>Forgiven: ${data.grudge.data.forgiven}</li>
-    </ul>
-    `)
+  $('.display-name').append(`<li>${data.grudge.data.name}</li>`)
 }
 
 postGrudge = () => {
