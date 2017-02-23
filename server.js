@@ -14,9 +14,7 @@ app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
 });
 
-app.locals.grudges = [
-  {id: 1}
-]
+app.locals.grudges = []
 
 app.get('/', (request, response) => {
 	response.sendFile(__dirname + '/public/index.html');
