@@ -1,0 +1,22 @@
+{
+  "name": "grudge-bin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "body-parser": "^1.16.0",
+    "jquery": "^3.1.1",
+    "jsdom": "^9.9.1",
+    "md5": "^2.2.1",
+    "shortid": "^2.2.6"
+  }
+}
