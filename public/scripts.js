@@ -1,3 +1,5 @@
+let grudgeList = []
+
 $(document).ready(function() {
   getGrudges();
 });
@@ -22,6 +24,7 @@ postGrudge = () => {
 }
 
 getGrudges = () => {
+  grudgeList = []
   $.ajax({
     type: 'GET',
     url: '/api/grudges'
@@ -30,12 +33,14 @@ getGrudges = () => {
     countTotal(res);
     countUnforgiven(res);
     countForgiven(res);
+    grudgeList.push(res)
   })
 }
 
 addNames = (res) => {
   $('.display-name').text('')
   res.map(function(grudge) {
+    
     $('.display-name').append(`
       <li><a
       href="/api/grudges/${grudge.id}" class="indvidual-name" id="${grudge.id}">
@@ -116,3 +121,45 @@ toggleForgive = (data) => {
     return false
   }
 }
+
+$('#name').on('click', (e) => {
+  e.preventDefault()
+  sortData(e.target.id)
+  addNames(grudgeList[0])
+})
+
+$('#reverse-name').on('click', (e) => {
+  e.preventDefault()
+  let type = 'name';
+  sortData(type).reverse()
+  addNames(grudgeList[0])
+})
+
+$('#date').on('click', (e) => {
+  e.preventDefault()
+  sortData(e.target.id)
+  addNames(grudgeList[0])
+})
+
+$('#reverse-date').on('click', (e) => {
+  e.preventDefault()
+  let type = 'date';
+  sortData(type).reverse();
+  addNames(grudgeList[0])
+})
+
+sortData = (type) => {
+  grudgeList[0].sort((a, b) => {
+    var a = a.data[type].toUpperCase();
+    var b = b.data[type].toUpperCase();
+    if (a < b) {
+      return -1;
+     }
+     if (a > b) {
+       return 1;
+     }
+     return 0;
+   })
+  return grudgeList[0]
+}
+
