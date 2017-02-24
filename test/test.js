@@ -52,6 +52,7 @@ describe('GET /', () => {
       response.should.be.json;
       response.should.be.a('object');
       response.body[0].data.should.be.eql(newGrudge);
+      done();
     });
   });
 });

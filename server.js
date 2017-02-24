@@ -9,11 +9,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.locals.title = 'Grudge Bin';
-const port = process.envPORT || 3000;
+app.set('port', process.env.PORT || 3000);
+const server = http.createServer(app);
 
-const server = http.createServer(app)
-                 .listen(port, () => {console.log(`${app.locals.title} is running on ${port}.`);
+app.listen(app.get('port'), () => {
+  console.log(`${app.locals.title} is running on ${app.get('port')}.`);
 });
+
 
 app.locals.grudges = []
 
