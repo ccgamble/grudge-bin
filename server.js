@@ -30,5 +30,26 @@ app.post('/api/grudges', (req, res) => {
   const grudge = {id, data}
   
   app.locals.grudges.push(grudge);
-  res.status(200).json({grudge});
+  res.status(200).json(grudge);
+})
+
+app.get('/api/grudges/:id', (req, res) => {
+  const data = app.locals.grudges.filter((grudge) => {
+    return grudge.id === req.params.id
+  });
+  res.json(data)
+});
+
+app.put('/api/grudges/:id', (req, res) => {
+  const id = req.params.id
+  let newData = req.body
+
+  const grudge = {id, newData}
+  const index = app.locals.grudges.findIndex((i) => {
+    return i.id == id
+  })
+  let oldData = app.locals.grudges[index].data
+  oldData = Object.assign(oldData, newData)
+  
+  res.json(app.locals.grudges)
 })
