@@ -39,3 +39,17 @@ app.get('/api/grudges/:id', (req, res) => {
   });
   res.json(data)
 });
+
+app.put('/api/grudges/:id', (req, res) => {
+  const id = req.params.id
+  let newData = req.body
+
+  const grudge = {id, newData}
+  const index = app.locals.grudges.findIndex((i) => {
+    return i.id == id
+  })
+  let oldData = app.locals.grudges[index].data
+  oldData = Object.assign(oldData, newData)
+  
+  res.json(app.locals.grudges)
+})

@@ -36,7 +36,11 @@ getGrudges = () => {
 addNames = (res) => {
   $('.display-name').text('')
   res.map(function(grudge) {
-    $('.display-name').append(`<li><a href="/api/grudges/${grudge.id}" class="indvidual-name" id="${grudge.id}">${grudge.data.name}</a></li>`)
+    $('.display-name').append(`
+      <li><a
+      href="/api/grudges/${grudge.id}" class="indvidual-name" id="${grudge.id}">
+      ${grudge.data.name}
+      </a></li>`)
   })
 }
   
@@ -74,19 +78,41 @@ getIndividualData = (id) => {
 }
 
 displayIndvidualInfo = (res) => {
+  let id = res[0].id
   $('.individual-name').text(res[0].data.name);
   $('.individual-description').text(res[0].data.description);
-  checkForForgiveness(res);
+  $('.toggle-forgive').html(`
+    <input class="forgive-btn" id=${id} type="button" value="toggle forgive">`)
 }
 
-checkForForgiveness = (res) => {
-  res[0].data.forgiven === true ? 
-  $('.forgive-checkbox').attr('checked') :
-  $('.forgive-checkbox').removeAttr('checked')
-  $('.forgive-checkbox').on('click', (e) => {
-    let checked = $('.forgive-checkbox').prop('checked')
-    console.log(checked)
-    checked = res[0].data.forgiven
-    console.log(res[0].data.forgiven)
+$(document).on('click', '.forgive-btn', (e) => {
+  e.preventDefault()
+  let id = e.target.id
+  updateForgiveness(id)
+})
+
+updateForgiveness = (id) => {
+  $.get(`/api/grudges/${id}`, function(res) {
+    $.ajax({
+      type: 'PUT',
+      url: `/api/grudges/${id}`,
+      data: {
+        name: res[0].data.name,
+        description: res[0].data.description,
+        date: res[0].data.date,
+        forgiven: toggleForgive(res[0].data)
+      }
+    }).then(function(data) {
+      getGrudges()
+    })
   })
+}
+
+toggleForgive = (data) => {
+  if (data.forgiven === "false") {
+    return true
+  }
+  if (data.forgiven === "true") {
+    return false
+  }
 }
