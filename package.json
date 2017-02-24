@@ -2,16 +2,17 @@
   "name": "grudge-bin",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.1",
-    "json-patch": "^0.6.1"
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "express": "^4.14.1"
   },
   "devDependencies": {
     "body-parser": "^1.16.0",

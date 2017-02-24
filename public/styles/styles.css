@@ -1,0 +1,96 @@
+body {
+  font-family: sans-serif;
+  color: white;
+  text-align: center;
+}
+
+h1 {
+  padding-top: 50px;
+  font-size: 36px;
+  background-color: black;
+}
+
+h2 {
+  font-size: 24px;
+  padding-top: 20px;
+}
+
+.input-form {
+  background-color: black;
+}
+
+input button{
+  width: 25px;
+  height: 30px;
+  margin: 20px;
+  border-radius: 20px;
+}
+
+label {
+  padding-right: 10px;
+  font-size: 1.5em;
+}
+
+button {
+  height: 28px;
+  border-radius: 5px;
+  background-color: orange;
+  font-size: 1.1em;
+  border: none;
+}
+
+button:hover {
+  background-color: white;
+}
+
+.results {
+  background-color: white;
+  color: black;
+  position: absolute;
+}
+
+.grudge-display {
+  width: 48vw;
+  float: left;
+  position: relative;
+}
+
+.grudge-display li {
+  list-style-type: none;
+}
+
+.display-name {
+  font-weight: bold;
+}
+
+.individual-display {
+  width: 48vw;
+  float: right;
+  position: relative;
+  padding-top: 20px;
+}
+
+.individual-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.sort {
+  background-color: black;
+}
+
+.name-sort {
+  display: inline-block;
+  margin: 20px;
+}
+
+.date-sort {
+  display: inline-block;
+}
+
+.count {
+  background-color: gray;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

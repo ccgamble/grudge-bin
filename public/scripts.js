@@ -8,7 +8,7 @@ $('.input-submit-btn').on('click', (e) => {
   e.preventDefault();
   postGrudge();
   getGrudges();
-})
+});
 
 postGrudge = () => {
   $.ajax({
@@ -20,8 +20,8 @@ postGrudge = () => {
       date: $('.date-input').val(),
       forgiven: false
     }
-  })
-}
+  });
+};
 
 getGrudges = () => {
   grudgeList = []
@@ -29,49 +29,48 @@ getGrudges = () => {
     type: 'GET',
     url: '/api/grudges'
   }).then(function(res) {
-    addNames(res)
+    addNames(res);
     countTotal(res);
     countUnforgiven(res);
     countForgiven(res);
-    grudgeList.push(res)
-  })
-}
+    grudgeList.push(res);
+  });
+};
 
 addNames = (res) => {
   $('.display-name').text('')
   res.map(function(grudge) {
-    
     $('.display-name').append(`
       <li><a
       href="/api/grudges/${grudge.id}" class="indvidual-name" id="${grudge.id}">
       ${grudge.data.name}
-      </a></li>`)
-  })
-}
+      </a></li>`);
+  });
+};
   
 countTotal = (res) => {
-  $('.total-count').text(res.length)
-}
+  $('.total-count').text(res.length);
+};
 
 countUnforgiven = (res) => {
   let unforgiven = res.filter(function(grudge) {
     return grudge.data.forgiven === 'false'
-  })
-  return $('.unforgiven-count').text(unforgiven.length)  
-}
+  });
+  return $('.unforgiven-count').text(unforgiven.length)
+};
 
 countForgiven = (res) => {
   let forgiven = res.filter(function(grudge) {
     return grudge.data.forgiven === 'true'
-  })
+  });
   return $('.forgiven-count').text(forgiven.length)  
-}
+};
 
 $(document).on('click', '.indvidual-name', (e) => {
-  e.preventDefault()
+  e.preventDefault();
   const id = e.target.id
   getIndividualData(id);
-})
+});
 
 getIndividualData = (id) => {
   $.ajax({
@@ -79,22 +78,23 @@ getIndividualData = (id) => {
     url: `/api/grudges/${id}`
   }).then(function(res) {
     displayIndvidualInfo(res);
-  })
-}
+  });
+};
 
 displayIndvidualInfo = (res) => {
   let id = res[0].id
   $('.individual-name').text(res[0].data.name);
   $('.individual-description').text(res[0].data.description);
+  $('.individual-date').text(res[0].data.date);
   $('.toggle-forgive').html(`
-    <input class="forgive-btn" id=${id} type="button" value="toggle forgive">`)
-}
+    <input class="forgive-btn" id=${id} type="button" value="Change Forgiveness">`)
+};
 
 $(document).on('click', '.forgive-btn', (e) => {
-  e.preventDefault()
+  e.preventDefault();
   let id = e.target.id
-  updateForgiveness(id)
-})
+  updateForgiveness(id);
+});
 
 updateForgiveness = (id) => {
   $.get(`/api/grudges/${id}`, function(res) {
@@ -108,10 +108,10 @@ updateForgiveness = (id) => {
         forgiven: toggleForgive(res[0].data)
       }
     }).then(function(data) {
-      getGrudges()
-    })
-  })
-}
+      getGrudges();
+    });
+  });
+};
 
 toggleForgive = (data) => {
   if (data.forgiven === "false") {
@@ -119,34 +119,34 @@ toggleForgive = (data) => {
   }
   if (data.forgiven === "true") {
     return false
-  }
-}
+  };
+};
 
 $('#name').on('click', (e) => {
-  e.preventDefault()
-  sortData(e.target.id)
-  addNames(grudgeList[0])
-})
+  e.preventDefault();
+  sortData(e.target.id);
+  addNames(grudgeList[0]);
+});
 
 $('#reverse-name').on('click', (e) => {
-  e.preventDefault()
+  e.preventDefault();
   let type = 'name';
-  sortData(type).reverse()
-  addNames(grudgeList[0])
-})
+  sortData(type).reverse();
+  addNames(grudgeList[0]);
+});
 
 $('#date').on('click', (e) => {
-  e.preventDefault()
-  sortData(e.target.id)
-  addNames(grudgeList[0])
-})
+  e.preventDefault();
+  sortData(e.target.id);
+  addNames(grudgeList[0]);
+});
 
 $('#reverse-date').on('click', (e) => {
-  e.preventDefault()
+  e.preventDefault();
   let type = 'date';
   sortData(type).reverse();
-  addNames(grudgeList[0])
-})
+  addNames(grudgeList[0]);
+});
 
 sortData = (type) => {
   grudgeList[0].sort((a, b) => {
@@ -161,5 +161,4 @@ sortData = (type) => {
      return 0;
    })
   return grudgeList[0]
-}
-
+};
