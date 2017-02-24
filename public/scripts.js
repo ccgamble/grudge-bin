@@ -40,6 +40,7 @@ getGrudges = () => {
 addNames = (res) => {
   $('.display-name').text('')
   res.map(function(grudge) {
+    
     $('.display-name').append(`
       <li><a
       href="/api/grudges/${grudge.id}" class="indvidual-name" id="${grudge.id}">
@@ -124,23 +125,27 @@ toggleForgive = (data) => {
 $('#name').on('click', (e) => {
   e.preventDefault()
   sortData(e.target.id)
+  addNames(grudgeList[0])
 })
 
 $('#reverse-name').on('click', (e) => {
   e.preventDefault()
   let type = 'name';
   sortData(type).reverse()
+  addNames(grudgeList[0])
 })
 
 $('#date').on('click', (e) => {
   e.preventDefault()
   sortData(e.target.id)
+  addNames(grudgeList[0])
 })
 
 $('#reverse-date').on('click', (e) => {
   e.preventDefault()
   let type = 'date';
   sortData(type).reverse();
+  addNames(grudgeList[0])
 })
 
 sortData = (type) => {
@@ -155,7 +160,6 @@ sortData = (type) => {
      }
      return 0;
    })
-   console.log(grudgeList[0])
   return grudgeList[0]
 }
 
