@@ -3,8 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title>Grudge Bin</title>
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/styles.css">
   </head>
   <body>
+    <h1>Grudge Bin</h1>
     <form class="input-form" method="post">
       <label for="name-input">
         Who wronged you?
@@ -21,26 +24,35 @@
       <input class="input-submit-btn" type="submit" value="Submit">
     </form>
     
-    <section class="grudge-display">
-      <p>Offenders: <span class="display-name"><span></p>
+    <section class="sort">
+      <p class="name-sort">Sort by Name
+        <input id="name" type="button" value=&#8593>
+        <input id="reverse-name" type="button" value=&#8595>
+      </p>
+      <p class="date-sort">Sort by Date
+        <input id="date" type="button" value=&#8593>
+        <input id="reverse-date" type="button" value=&#8595>
+      </p>
+    </section>
+    
+    <section class="results">
+      <section class="grudge-display">
+        <h2>Offenders</h2>
+        <p><span class="display-name"><span></p>
+      </section>
+      
+      <section class="individual-display">
+        <p><span class="individual-name"><span></p>
+        <p><span class="individual-description"><span></p>
+        <p><span class="individual-date"><span></p>
+        <p class="toggle-forgive"><p>
+      </section>
+    </section>
+    
+    <section class="count">
       <p>Total Count: <span class="total-count"></span></p>
       <p>Unforgiven: <span class="unforgiven-count"></span></p>
       <p>Forgiven: <span class="forgiven-count"></span></p>
-    </section>
-    
-    <section class="individual-display">
-      <p>Name: <span class="individual-name"><span></p>
-      <p>Offense: <span class="individual-description"><span></p>
-      <p class="toggle-forgive"><p>
-    </section>
-    
-    <section class="sort">
-      <p>Sort by Name</p>
-        <input id="name" type="button" value=&#8593>
-        <input id="reverse-name" type="button" value=&#8595>
-      <p>Sort by Date</p>
-      <input id="date" type="button" value=&#8593>
-      <input id="reverse-date" type="button" value=&#8595>
     </section>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

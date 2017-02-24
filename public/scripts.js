@@ -86,6 +86,8 @@ displayIndvidualInfo = (res) => {
   let id = res[0].id
   $('.individual-name').text(res[0].data.name);
   $('.individual-description').text(res[0].data.description);
+  $('.individual-date').text(res[0].data.date);
+
   $('.toggle-forgive').html(`
     <input class="forgive-btn" id=${id} type="button" value="toggle forgive">`)
 }
