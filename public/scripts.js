@@ -30,7 +30,7 @@ getGrudges = () => {
     url: '/api/grudges'
   }).then(function(res) {
     addNames(res);
-    countTotal(res);
+    appendCount(res);
     countUnforgiven(res);
     countForgiven(res);
     grudgeList.push(res);
@@ -40,30 +40,25 @@ getGrudges = () => {
 addNames = (res) => {
   $('.display-name').text('')
   res.map(function(grudge) {
-    $('.display-name').append(`
-      <li><a
-      href="/api/grudges/${grudge.id}" class="indvidual-name" id="${grudge.id}">
-      ${grudge.data.name}
-      </a></li>`);
+    let item = template(grudge)
+    $('.display-name').append(item)
   });
-};
-  
-countTotal = (res) => {
-  $('.total-count').text(res.length);
 };
 
-countUnforgiven = (res) => {
-  let unforgiven = res.filter(function(grudge) {
-    return grudge.data.forgiven === 'false'
-  });
-  return $('.unforgiven-count').text(unforgiven.length)
+appendCount = (grudges) => {
+  let totalCount = countTotal(grudges)
+  $('.total-count').text(totalCount)
+}
+
+
+countUnforgiven = (grudges) => {
+  let unforgiven = filterUnforgiven(grudges);
+  return $('.unforgiven-count').text(unforgiven.length);
 };
 
-countForgiven = (res) => {
-  let forgiven = res.filter(function(grudge) {
-    return grudge.data.forgiven === 'true'
-  });
-  return $('.forgiven-count').text(forgiven.length)  
+countForgiven = (grudges) => {
+  let forgiven = filterForgiven(grudges);
+  return $('.forgiven-count').text(forgiven.length);
 };
 
 $(document).on('click', '.indvidual-name', (e) => {

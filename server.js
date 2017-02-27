@@ -19,16 +19,16 @@ app.listen(app.get('port'), () => {
 app.locals.grudges = []
 
 app.get('/', (request, response) => {
-	response.sendFile(__dirname + '/public/index.html');
+  response.sendFile(__dirname + '/public/index.html');
 });
 
 app.get('/api/grudges', (req, res) => {
-  res.json(app.locals.grudges)
+  res.json(app.locals.grudges);
 })
 
 app.post('/api/grudges', (req, res) => {
   const data = req.body
-  const id = md5(data.description)
+  const id = md5(data.description);
   const grudge = {id, data}
   
   app.locals.grudges.push(grudge);
@@ -39,7 +39,7 @@ app.get('/api/grudges/:id', (req, res) => {
   const data = app.locals.grudges.filter((grudge) => {
     return grudge.id === req.params.id
   });
-  res.json(data)
+  res.json(data);
 });
 
 app.put('/api/grudges/:id', (req, res) => {
@@ -51,9 +51,9 @@ app.put('/api/grudges/:id', (req, res) => {
     return i.id == id
   })
   let oldData = app.locals.grudges[index].data
-  oldData = Object.assign(oldData, newData)
+  oldData = Object.assign(oldData, newData);
   
-  res.json(app.locals.grudges)
+  res.json(app.locals.grudges);
 })
 
 module.exports = app;
